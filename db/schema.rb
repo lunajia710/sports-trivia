@@ -10,7 +10,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
+<<<<<<< HEAD
 ActiveRecord::Schema[8.1].define(version: 2026_07_21_115625) do
+=======
+ActiveRecord::Schema[8.1].define(version: 2026_07_21_122954) do
+>>>>>>> master
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -22,6 +26,18 @@ ActiveRecord::Schema[8.1].define(version: 2026_07_21_115625) do
     t.index ["user_id"], name: "index_decks_on_user_id"
   end
 
+<<<<<<< HEAD
+=======
+  create_table "options", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.boolean "is_solution"
+    t.bigint "question_id", null: false
+    t.text "response"
+    t.datetime "updated_at", null: false
+    t.index ["question_id"], name: "index_options_on_question_id"
+  end
+
+>>>>>>> master
   create_table "questions", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.bigint "deck_id", null: false
@@ -44,5 +60,9 @@ ActiveRecord::Schema[8.1].define(version: 2026_07_21_115625) do
   end
 
   add_foreign_key "decks", "users"
+<<<<<<< HEAD
+=======
+  add_foreign_key "options", "questions"
+>>>>>>> master
   add_foreign_key "questions", "decks"
 end
