@@ -1,1 +1,72 @@
-// Specific CSS for your home-page
+.home-page {
+  min-height: 100vh;
+  background-color: #f8f9fa;
+}
+
+.navbar {
+  padding: 16px 0;
+}
+
+.navbar-brand {
+  color: #198754;
+  font-weight: bold;
+}
+
+.home-intro h1 {
+  color: #198754;
+  margin-top: 40px;
+  margin-bottom: 10px;
+}
+
+.home-intro p {
+  color: #6c757d;
+  font-size: 18px;
+  margin-bottom: 20px;
+}
+
+.trending-section {
+  margin-top: 50px;
+  margin-bottom: 50px;
+}
+
+.trending-section h2 {
+  color: #198754;
+  margin-bottom: 20px;
+}
+
+.deck-card {
+  background-color: #ffffff;
+  border: 1px solid #dee2e6;
+  border-radius: 10px;
+  overflow: hidden;
+  margin-bottom: 20px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.deck-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+}
+
+.deck-image {
+  height: 160px;
+  background-color: #d1e7dd;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 50px;
+}
+
+.deck-content {
+  padding: 20px;
+}
+
+.deck-content h3 {
+  color: #198754;
+  margin-bottom: 5px;
+}
+
+.deck-content p {
+  color: #6c757d;
+  margin-bottom: 0;
+}

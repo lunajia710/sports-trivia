@@ -10,9 +10,25 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_07_21_112804) do
+ActiveRecord::Schema[8.1].define(version: 2026_07_21_115625) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
+
+  create_table "decks", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.string "title"
+    t.datetime "updated_at", null: false
+    t.bigint "user_id", null: false
+    t.index ["user_id"], name: "index_decks_on_user_id"
+  end
+
+  create_table "questions", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.bigint "deck_id", null: false
+    t.text "question"
+    t.datetime "updated_at", null: false
+    t.index ["deck_id"], name: "index_questions_on_deck_id"
+  end
 
   create_table "users", force: :cascade do |t|
     t.datetime "created_at", null: false
@@ -26,4 +42,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_07_21_112804) do
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
+
+  add_foreign_key "decks", "users"
+  add_foreign_key "questions", "decks"
 end
