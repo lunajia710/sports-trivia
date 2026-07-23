@@ -71,3 +71,62 @@
   color: #6c757d;
   margin-bottom: 0;
 }
+
+.deck-actions {
+  display: flex;
+  justify-content: space-around;
+  padding: 16px;
+  border-top: 1px solid #e9ecef;
+}
+
+.action-btn {
+  color: darkgrey;
+  font-size: 1.5rem;
+  text-decoration: none;
+  transition: transform 0.2s ease, color 0.2s ease;
+}
+
+.action-btn:hover {
+  color: darkgrey;
+  transform: scale(1.15);
+}
+
+.answers {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  margin-top: 60px;
+}
+
+.card-product {
+  width: 450px;
+  background: white;
+  border: 1px solid #dee2e6;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.card-product-body {
+  padding: 24px;
+  text-align: center;
+}
+
+.question {
+  margin: 0;
+  font-size: 1.2rem;
+  font-weight: 500;
+}
+
+.question-heading {
+  text-align: center;
+  margin: 60px 0 40px;
+}
+
+.question-heading h1 {
+  font-size: 2.2rem;
+  font-weight: 700;
+  line-height: 1.4;
+  max-width: 800px;
+  margin: 0 auto;
+}
