@@ -13,6 +13,7 @@ puts "Cleaning database..."
 Deck.destroy_all
 User.destroy_all
 
+
 # Users
 puts "creating users..."
 tom = User.create!(username: "tom", email: "tom@example.com", password: "secret123")
@@ -97,13 +98,14 @@ puts "Finished! Created #{Question.count} questions."
 # Round Play
 puts "Creating rounds & answers..."
 Deck.all.each do |deck|
-  # 3 completed rounds per deck for leaderboard has entries to rank
+  # 1 completed rounds per deck for leaderboard has entries to rank
   players.sample(3).each do |player|
     round = Round.create!(deck: deck, user: player)
     deck.questions.each do |question|
       option = question.options.sample
       answer = round.answers.create!(question: question, response: option.response)
       round.increment!(:score) if answer.correct?
+      puts "  #{player.username} played \"#{deck.title}\" — score #{round.score}/#{deck.questions.count}"
     end
   end
 end
