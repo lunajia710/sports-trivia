@@ -10,9 +10,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_07_23_103323) do
+ActiveRecord::Schema[8.1].define(version: 2026_07_23_111322) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
+
+  create_table "answers", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.bigint "question_id", null: false
+    t.text "response"
+    t.bigint "round_id", null: false
+    t.datetime "updated_at", null: false
+    t.index ["question_id"], name: "index_answers_on_question_id"
+    t.index ["round_id", "question_id"], name: "index_answers_on_round_id_and_question_id", unique: true
+    t.index ["round_id"], name: "index_answers_on_round_id"
+  end
 
   create_table "decks", force: :cascade do |t|
     t.datetime "created_at", null: false
@@ -62,6 +73,8 @@ ActiveRecord::Schema[8.1].define(version: 2026_07_23_103323) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "answers", "questions"
+  add_foreign_key "answers", "rounds"
   add_foreign_key "decks", "users"
   add_foreign_key "options", "questions"
   add_foreign_key "questions", "decks"
