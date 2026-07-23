@@ -9,18 +9,27 @@
 #   end
 
 # Reset
+puts "Cleaning database..."
 Deck.destroy_all
 User.destroy_all
 
 # Users
+puts "creating users..."
 tom = User.create!(username: "tom", email: "tom@example.com", password: "secret123")
 jerry = User.create!(username: "jerry", email: "jerry@example.com", password: "secret123")
+ab = User.create!(username: "ab", email: "ab@example.com", password: "secret123")
+scooter = User.create!(username: "scooter", email: "scooter@example.com", password: "secret123")
+players = [tom, jerry, ab, scooter]
+puts "Finished! Created #{User.count} users."
 
 # Decks
+puts "creating decks..."
 world_cup_deck = Deck.create!(title: "World Cup 2026", user: tom)
 nba_deck = Deck.create!(title: "NBA Legends", user: jerry)
+puts "Finished! Created #{Deck.count} decks."
 
 # World Cup 2026 — Question 1
+puts "creating questions..."
 q1 = Question.create(question: "Who scored for France in the 2006 World Cup Semi Final against Brazil?")
 q1.update(deck: world_cup_deck)
 q1.options.create!(response: "Thierry Henry", is_solution: true)
@@ -83,3 +92,18 @@ n4.options.create!(response: "Bill Russell", is_solution: true)
 n4.options.create!(response: "Michael Jordan", is_solution: false)
 n4.options.create!(response: "Kareem Abdul-Jabbar", is_solution: false)
 n4.options.create!(response: "Magic Johnson", is_solution: false)
+puts "Finished! Created #{Question.count} questions."
+
+# Round Play
+puts "Creating rounds & answers..."
+Deck.all.each do |deck|
+  # 3 completed rounds per deck for leaderboard has entries to rank
+  players.sample(3).each do |player|
+    round = Round.create!(deck: deck, user: player)
+    deck.questions.each do |question|
+      option = question.options.sample
+      answer = round.answers.create!(question: question, response: option.response)
+      round.increment!(:score) if answer.correct?
+    end
+  end
+end
