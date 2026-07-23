@@ -1,0 +1,14 @@
+<h1>Sports Trivia Questions</h1>
+
+<% @questions.each do |question| %>
+  <div class="card mb-4 p-3">
+
+    <h3><%= question.question %></h3>
+
+    <button><%= question.option_a %></button><br>
+    <button><%= question.option_b %></button><br>
+    <button><%= question.option_c %></button><br>
+    <button><%= question.option_d %></button>
+
+  </div>
+<% end %>
