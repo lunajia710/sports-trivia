@@ -1,9 +1,11 @@
 <h1><%= @question.deck.title %></h1>
-<h3><%= @question.question  %></h3>
-<% @question.options.each do |option| %>
-  <div class="card">
-    <button>
-      <%= option.response %>
-    </button>
-  </div>
-<% end %>
+<div class="container mx-auto">
+  <h3><%= @question.question  %></h3>
+  <% @question.options.each do |option| %>
+    <div class="card m-3">
+      <button class="btn btn-outline-success">
+        <%= option.response %>
+      </button>
+    </div>
+  <% end %>
+</div>
