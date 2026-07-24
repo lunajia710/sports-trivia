@@ -1,0 +1,13 @@
+<h1><%= @deck.title %></h1>
+
+<div class="container mx-auto">
+  <h3><%= @question.question %></h3>
+
+  <% @question.options.each do |option| %>
+    <%= simple_form_for [@round, Answer.new] do |f| %>
+      <%= f.input :question_id, as: :hidden, input_html: { value: @question.id } %>
+      <%= f.input :response,    as: :hidden, input_html: { value: option.response } %>
+      <%= f.button :submit, option.response, class: "btn btn-outline-success w-100" %>
+    <% end %>
+  <% end %>
+</div>
