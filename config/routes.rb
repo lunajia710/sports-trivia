@@ -2,6 +2,9 @@ Rails.application.routes.draw do
   devise_for :users
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
   resources :questions, only: [:index]
+  resources :rounds, only: [:show] do
+    resources :answers, only: [:create]
+  end
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
   # Can be used by load balancers and uptime monitors to verify that the app is live.
   get "up" => "rails/health#show", as: :rails_health_check
@@ -13,7 +16,7 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   # root "posts#index"
   root to: "pages#home"
-  get "rounds/:id", to: "rounds#show"
+  # get "rounds/:id", to: "rounds#show", as: :round_path
   get "questions/index"
   get "my_deck", to: "pages#my_deck"
   get "play_trivia", to: "pages#play_trivia"
