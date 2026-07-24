@@ -2,4 +2,5 @@
 <p>Total questions: <%= @deck.questions.count %></p>
 <p>Created by: <%= @deck.user.username %></p>
 <p>Rounds played: <%= @deck.rounds.count %></p>
+<p>Last played by: <%= @deck.rounds.last.user.username  %></p>
 <%= button_to "Play", deck_rounds_path(@deck), method: :post, class: "btn btn-success" %>
