@@ -1,7 +1,9 @@
-<h1>Rounds#show</h1>
-<p>@question</p>
+<h1><%= @question.deck.title %></h1>
+<h3><%= @question.question  %></h3>
 <% @question.options.each do |option| %>
-  <button>
-    <%= option.reponse %>
-  </button>
+  <div class="card">
+    <button>
+      <%= option.response %>
+    </button>
+  </div>
 <% end %>
