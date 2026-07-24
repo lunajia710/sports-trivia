@@ -109,3 +109,10 @@ Deck.all.each do |deck|
     end
   end
 end
+
+puts "Creating uncompleted rounds..."
+half_done = Round.create!(deck: Deck.first, user: players.last)
+Deck.first.questions.limit(2).each do |question|
+  half_done.answers.create!(question: question, response: question.options.sample.response)
+end
+puts "Finished! Created incomplete round #{half_done.id}"
