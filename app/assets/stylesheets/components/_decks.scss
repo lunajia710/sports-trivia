@@ -1,0 +1,55 @@
+.deck-card {
+  background-color: $white;
+  border: 1px solid $border-color;
+  border-radius: 10px;
+  overflow: hidden;
+  margin-bottom: 20px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.deck-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+}
+
+.deck-image {
+  height: 160px;
+  background-color: tint-color($success, 80%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 50px;
+}
+
+.deck-content {
+  padding: 20px;
+}
+
+.deck-content h3 {
+  color: $success;
+  margin-bottom: 5px;
+}
+
+.deck-content p {
+  color: $text-muted;
+  margin-bottom: 0;
+}
+
+.deck-actions {
+  display: flex;
+  justify-content: space-around;
+  padding: 16px;
+  border-top: 1px solid $gray-200;
+}
+
+.action-btn {
+  color: darkgrey;
+  font-size: 1.5rem;
+  text-decoration: none;
+  transition: transform 0.2s ease, color 0.2s ease;
+}
+
+.action-btn:hover {
+  color: darkgrey;
+  transform: scale(1.15);
+}

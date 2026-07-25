@@ -1,0 +1,19 @@
+.answer-card {
+  width: 100%;
+  max-width: 450px;
+  background-color: $white;
+  border: 1px solid $border-color;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.answer-card-body {
+  padding: 24px;
+  text-align: center;
+}
+
+.answer {
+  margin: 0;
+  font-size: 1.2rem;
+  font-weight: 500;
+}
