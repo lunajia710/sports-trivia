@@ -1,0 +1,33 @@
+.leaderboard-page {
+  min-height: 100vh;
+  background-color: $light-gray;
+}
+
+.leaderboard-heading h1 {
+  font-size: 36px;
+  font-weight: bold;
+}
+
+.leaderboard-card {
+  max-width: 700px;
+  margin: 0 auto;
+  background-color: $white;
+  border: 1px solid $border-color;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.leaderboard-card th {
+  background-color: $success;
+  color: $white;
+}
+
+.leaderboard-card th,
+.leaderboard-card td {
+  padding: 16px;
+}
+
+.leaderboard-card td:last-child {
+  color: $success;
+  font-weight: bold;
+}

@@ -1,0 +1,24 @@
+.play-trivia-page {
+  min-height: 100vh;
+  background-color: $light-gray;
+}
+
+.question-heading {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.question-heading h1 {
+  max-width: 800px;
+  margin: 0 auto;
+  font-size: 2.2rem;
+  font-weight: 700;
+  line-height: 1.4;
+}
+
+.answers {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
