@@ -1,3 +1,71 @@
+<div class="leaderboard-page">
+
+  <nav class="navbar bg-white border-bottom">
+    <div class="container">
+
+      <a href="#" class="navbar-brand">
+        Trivia Decks
+      </a>
+
+    </div>
+  </nav>
+
+
+  <main class="container py-5">
+
+    <div class="leaderboard-heading text-center mb-4">
+
+      <h1><%= @deck.title %></h1>
+
+      <p class="text-muted">
+        Leaderboard (Top 10 Plays)
+      </p>
+
+      <div class="d-flex justify-content-center gap-2">
+        <button class="btn btn-outline-success">
+          Share
+        </button>
+
+        <button class="btn btn-success">
+          👍 Like
+        </button>
+      </div>
+
+    </div>
+
+
+    <div class="leaderboard-card">
+
+      <table class="table table-hover mb-0">
+
+        <thead>
+          <tr>
+            <th>Rank</th>
+            <th>Player</th>
+            <th>Score</th>
+          </tr>
+        </thead>
+        <% index = 1 %>
+        <% @leaderboard.each do |round| %>
+        <tbody>
+          <tr>
+            <td><%= index %></td>
+            <td><%= round.user.username %></td>
+            <td><%= round.score %></td>
+            <% index += 1 %>
+          </tr>
+
+        </tbody>
+        <% end %>
+
+      </table>
+
+    </div>
+
+  </main>
+
+</div>
+
 <h1><%= @deck.title %></h1>
 <p>Total questions: <%= @deck.questions.count %></p>
 <p>Created by: <%= @deck.user.username %></p>
@@ -9,7 +77,6 @@
     <%= round.user.username %>
     <%= round.score %>
   </div>
-
 <% end %>
 <%= button_to "Play", deck_rounds_path(@deck), method: :post, class: "btn btn-success" %>
 <%= link_to "Return", decks_path %>
