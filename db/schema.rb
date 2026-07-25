@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_07_23_121841) do
+ActiveRecord::Schema[8.1].define(version: 2026_07_25_072828) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -25,12 +25,28 @@ ActiveRecord::Schema[8.1].define(version: 2026_07_23_121841) do
     t.index ["round_id"], name: "index_answers_on_round_id"
   end
 
+  create_table "chats", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.bigint "deck_id", null: false
+    t.datetime "updated_at", null: false
+    t.index ["deck_id"], name: "index_chats_on_deck_id"
+  end
+
   create_table "decks", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.string "title"
     t.datetime "updated_at", null: false
     t.bigint "user_id", null: false
     t.index ["user_id"], name: "index_decks_on_user_id"
+  end
+
+  create_table "messages", force: :cascade do |t|
+    t.bigint "chat_id", null: false
+    t.text "content"
+    t.datetime "created_at", null: false
+    t.string "role"
+    t.datetime "updated_at", null: false
+    t.index ["chat_id"], name: "index_messages_on_chat_id"
   end
 
   create_table "options", force: :cascade do |t|
@@ -217,7 +233,9 @@ ActiveRecord::Schema[8.1].define(version: 2026_07_23_121841) do
 
   add_foreign_key "answers", "questions"
   add_foreign_key "answers", "rounds"
+  add_foreign_key "chats", "decks"
   add_foreign_key "decks", "users"
+  add_foreign_key "messages", "chats"
   add_foreign_key "options", "questions"
   add_foreign_key "questions", "decks"
   add_foreign_key "rounds", "decks"
