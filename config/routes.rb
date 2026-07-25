@@ -23,6 +23,11 @@ Rails.application.routes.draw do
   root to: "pages#home"
   # get "rounds/:id", to: "rounds#show", as: :round_path
   get "questions/index"
+
+
+  # change names of views and delete below after MVC complete
   get "my_deck", to: "pages#my_deck"
   get "play_trivia", to: "pages#play_trivia"
+  get "signup", to: "pages#signup"
+  get "login", to: "pages#login"
 end
