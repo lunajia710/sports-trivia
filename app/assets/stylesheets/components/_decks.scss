@@ -28,6 +28,13 @@
 .deck-content h3 {
   color: $success;
   margin-bottom: 5px;
+  text-decoration: none;
+}
+
+.deck-content a {
+  color: $success;
+  margin-bottom: 5px;
+  text-decoration: none;
 }
 
 .deck-content p {

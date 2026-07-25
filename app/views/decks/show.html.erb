@@ -3,5 +3,13 @@
 <p>Created by: <%= @deck.user.username %></p>
 <p>Rounds played: <%= @deck.rounds.count %></p>
 <p>Last played by: <%= @deck.rounds.last.user.username  %></p>
+<h2>Leaderboard</h2>
+<% @leaderboard.each do |round| %>
+  <div>
+    <%= round.user.username %>
+    <%= round.score %>
+  </div>
+
+<% end %>
 <%= button_to "Play", deck_rounds_path(@deck), method: :post, class: "btn btn-success" %>
 <%= link_to "Return", decks_path %>
