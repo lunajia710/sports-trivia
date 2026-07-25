@@ -20,7 +20,7 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   # root "posts#index"
-  root to: "pages#home"
+  root to: "decks#index"
   # get "rounds/:id", to: "rounds#show", as: :round_path
   get "questions/index"
   get "my_deck", to: "pages#my_deck"
