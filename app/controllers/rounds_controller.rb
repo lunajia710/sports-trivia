@@ -16,7 +16,7 @@ class RoundsController < ApplicationController
       @round = @deck.rounds.create!(user: current_user)
       redirect_to round_path(@round)
     else
-      redirect_to new_user_session
+      redirect_to new_user_session_url
     end
   end
 end
