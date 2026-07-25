@@ -1,8 +1,68 @@
-<h1>Decks</h1>
+<div class="home-page">
 
-<p>Trending decks (login to play)</p>
-<% @decks.each do |deck| %>
-  <div>
-    <%= link_to deck.title, deck_path(deck) %>
-  </div>
-<% end %>
+  <nav class="navbar bg-white border-bottom">
+    <div class="container">
+
+      <a href="#" class="navbar-brand">
+        Trivia Decks
+      </a>
+
+      <div>
+        <a href="#" class="btn btn-success">
+          Log in
+        </a>
+
+        <a href="#" class="btn btn-success">
+          Sign up
+        </a>
+      </div>
+
+    </div>
+  </nav>
+
+
+  <main class="container py-5">
+
+    <div class="page-intro">
+      <h1>Search for Decks!</h1>
+
+      <p>
+        Choose a sports trivia deck and start playing.
+      </p>
+
+      <div class="input-group">
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Search for a deck"
+        >
+
+        <button class="btn btn-success">
+          Search
+        </button>
+      </div>
+    </div>
+
+
+    <div class="decks-section">
+
+      <h2>Trending Decks</h2>
+        <% @decks.each do |deck| %>
+
+          <div class="row">
+
+            <div class="col-12 col-md-6">
+              <div class="deck-card">
+                <%# <div class="deck-image">
+                </div> %>
+
+                <div class="deck-content">
+                  <h3> <%= link_to deck.title, decks_path(deck) %></h3>
+                  <%= button_to "Play", deck_rounds_path(deck), method: :post, class: "btn btn-success" %>
+                  <p><%= deck.questions.count %> questions</p>
+                </div>
+
+              </div>
+            </div>
+        <% end %>
+        </div>
