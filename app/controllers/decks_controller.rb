@@ -5,5 +5,6 @@ class DecksController < ApplicationController
 
   def show
     @deck = Deck.find(params[:id])
+    @leaderboard = @deck.rounds.includes(:user).order(score: :desc).limit(10)
   end
 end
