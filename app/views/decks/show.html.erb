@@ -4,3 +4,4 @@
 <p>Rounds played: <%= @deck.rounds.count %></p>
 <p>Last played by: <%= @deck.rounds.last.user.username  %></p>
 <%= button_to "Play", deck_rounds_path(@deck), method: :post, class: "btn btn-success" %>
+<%= link_to "Return", decks_path %>

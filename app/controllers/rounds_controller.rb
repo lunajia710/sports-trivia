@@ -11,8 +11,12 @@ class RoundsController < ApplicationController
   end
 
   def create
-    @deck = Deck.find(params[:deck_id])
-    @round = @deck.rounds.create!(user: current_user)
-    redirect_to round_path(@round)
+    if current_user
+      @deck = Deck.find(params[:deck_id])
+      @round = @deck.rounds.create!(user: current_user)
+      redirect_to round_path(@round)
+    else
+      redirect_to new_user_session_url
+    end
   end
 end

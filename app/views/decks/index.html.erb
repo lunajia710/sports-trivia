@@ -1,3 +1,8 @@
 <h1>Decks</h1>
 
 <p>Trending decks (login to play)</p>
+<% @decks.each do |deck| %>
+  <div>
+    <%= link_to deck.title, deck_path(deck) %>
+  </div>
+<% end %>
