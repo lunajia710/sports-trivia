@@ -1,0 +1,16 @@
+<%= turbo_stream.update "question_card" do %>
+  <h1><%= @question.deck.title %></h1>
+  <div class="container mx-auto">
+    <h3><%= @question.question %></h3>
+    <div class="question_card">
+      <% @question.options.each do |option| %>
+        <div class="card m-3">
+          <button class="btn w-100 <%= option.is_solution ? 'btn-success' : 'btn-danger'%> " disabled>
+            <%= option.response %>
+          </button>
+        </div>
+      <% end %>
+    </div>
+    <%= link_to "Next", round_path(@round), class: "btn btn-primary m-3" %>
+  </div>
+<% end %>
