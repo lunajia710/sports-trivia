@@ -1,4 +1,18 @@
 class DecksController < ApplicationController
+  class DeckSchema < RubyLLM::Schema
+    array :questions do
+      object do
+        string :question, description: "The trivia question text"
+        array :options do
+          object do
+            string  :response,    description: "The answer option text"
+            boolean :is_solution, description: "True for the one correct option, false otherwise"
+          end
+        end
+      end
+    end
+  end
+
   def index
     @decks = Deck.all
   end
@@ -7,13 +21,27 @@ class DecksController < ApplicationController
     @deck = Deck.new
   end
 
-  def create
+  def create # rubocop:disable Metrics/MethodLength
     # user types name of deck and creates a new deck with that name
     @deck = Deck.new(deck_params)
     @deck.user = current_user
+    data = RubyLLM.chat(model: "gpt-4o-mini")
+                  .with_schema(DeckSchema)
+                  .ask("Generate 2 questions about: #{@deck.title}. Each question must have 4 options with only 1 is_solution: ture") # rubocop:disable Layout/LineLength
+                  .content
 
     if @deck.save
-      redirect_to deck_path(@deck)
+      data["questions"].each do |q|
+        question = Question.new(question: q["question"])
+        question.deck = @deck
+        question.save
+        q["options"].each do |o|
+          option = Option.new(response: o["response"], is_solution: o["is_solution"])
+          option.question = question
+          option.save
+        end
+      end
+      redirect_to decks_path
     else
       render :new, status: 422
     end
