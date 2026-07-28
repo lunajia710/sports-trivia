@@ -15,6 +15,7 @@ class DecksController < ApplicationController
 
   def index
     @decks = Deck.all
+    @top_decks = decks_by_rounds.limit(5)
   end
 
   def new
@@ -25,9 +26,11 @@ class DecksController < ApplicationController
     # user types name of deck and creates a new deck with that name
     @deck = Deck.new(deck_params)
     @deck.user = current_user
+    @chat = Chat.new
+    @chat.deck = @deck
     data = RubyLLM.chat(model: "gpt-4o-mini")
                   .with_schema(DeckSchema)
-                  .ask("Generate 10 questions about: #{@deck.title}. Each question must have 4 options with only 1 is_solution: ture") # rubocop:disable Layout/LineLength
+                  .ask("Generate 10 questions about: #{@deck.title}. Each question must have 4 options with only 1 is_solution: true") # rubocop:disable Layout/LineLength
                   .content
 
     if @deck.save
@@ -60,6 +63,10 @@ class DecksController < ApplicationController
 
   def deck_params
     params.require(:deck).permit(:title)
+  end
+
+  def decks_by_rounds
+    Deck.left_joins(:rounds).group(:id).order("COUNT(rounds.id) DESC")
   end
 end
 

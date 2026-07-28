@@ -1,7 +1,7 @@
-<h1>Generate a new deck</h1>
-
-<%= simple_form_for @deck do |f| %>
-  <%= f.input :title %>
-  <%= f.submit "Start AI generator", class: "btn btn-primary" %>
-
-<% end %>
+<div class="container m-4 deck-card p-4">
+  <h1>Generate a new deck</h1>
+  <%= simple_form_for @deck do |f| %>
+    <%= f.input :title %>
+    <%= f.submit "Start AI generator", class: "btn btn-primary" %>
+  <% end %>
+</div>

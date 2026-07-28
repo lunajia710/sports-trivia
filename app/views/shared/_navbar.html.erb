@@ -1,0 +1,17 @@
+<nav class="navbar bg-white border-bottom">
+  <div class="container">
+
+    <%= link_to "Trivia Decks", root_path, class: "navbar-brand" %>
+
+    <div class="d-flex">
+      <% if user_signed_in? %>
+        <span class="me-2 m-2">log in as <%= current_user.username %></span>
+        <%= button_to "Log out", destroy_user_session_path, method: :delete, class: "btn btn-success m-1" %>
+      <% else %>
+        <%= link_to "Log in", new_user_session_path, class: "btn btn-success m-1" %>
+        <%= link_to "Sign up", new_user_registration_path, class: "btn btn-success m-1" %>
+      <% end %>
+    </div>
+
+  </div>
+</nav>

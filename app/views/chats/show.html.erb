@@ -1,0 +1,18 @@
+<h1>Chat to create Deck </h1>
+<% if @chat.messages.none? %>
+  <p>No messages</p>
+<% else %>
+  <% @chat.messages.each do |msg| %>
+    <p>
+      <%= msg.role %>
+      <%= msg.content %>
+    </p>
+  <% end %>
+<% end %>
+
+<div id="new_msg_container">
+  <%= simple_form_for [@chat, @message] do |f| %>
+    <%= f.input :content, label: "Ask a question", required: true %>
+    <%= f.button :submit, "Ask AI", class: "btn btn-primary" %>
+  <% end %>
+</div>
