@@ -1,5 +1,6 @@
 <h1>Generate a new deck</h1>
-<%= simple_form @deck do |f| %>
+
+<%= simple_form_for @deck do |f| %>
   <%= f.input :title %>
   <%= f.submit "generate a new deck", class: "btn btn-primary" %>
 
