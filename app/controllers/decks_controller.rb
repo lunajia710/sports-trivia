@@ -12,14 +12,14 @@ class DecksController < ApplicationController
     @deck = Deck.new
   end
 
-  # def create
-  # ##user types name of deck and creates a new deck with that name
-  # @deck = current_user.decks.create!(title: deck_params[:title])
-  # #in response to user givcing deck name
-  # #create a chat with four questions and four answers per question, one correct, three incorrect
-  # @chat = @deck.chats.create!
-  # #create a message with the prompt to create four questions and four answers per question, one
-  # end
+  def create
+    # user types name of deck and creates a new deck with that name
+    @deck = Deck.new
+    # in response to user givcing deck name
+    # create a chat with four questions and four answers per question, one correct, three incorrect
+    @chat = RubyLLM.chat
+    # create a message with the prompt to create four questions and four answers per question, one
+  end
 end
 
 # provide feedback to update the deck
