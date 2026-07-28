@@ -27,7 +27,7 @@ class DecksController < ApplicationController
     @deck.user = current_user
     data = RubyLLM.chat(model: "gpt-4o-mini")
                   .with_schema(DeckSchema)
-                  .ask("Generate 2 questions about: #{@deck.title}. Each question must have 4 options with only 1 is_solution: ture") # rubocop:disable Layout/LineLength
+                  .ask("Generate 10 questions about: #{@deck.title}. Each question must have 4 options with only 1 is_solution: ture") # rubocop:disable Layout/LineLength
                   .content
 
     if @deck.save
