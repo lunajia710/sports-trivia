@@ -41,7 +41,13 @@ class DecksController < ApplicationController
           option.save
         end
       end
-      redirect_to decks_path
+      @chat = Chat.new
+      @chat.deck = @deck
+      @chat.save
+      @chat.messages.create!(role: "assistant", content: "Here's your #{@deck.title} deck.\n
+      I created 10 questions for now.\n
+      How do you want to refine it?")
+      redirect_to chat_path(@chat)
     else
       render :new, status: 422
     end
