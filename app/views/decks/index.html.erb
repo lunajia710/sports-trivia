@@ -58,7 +58,12 @@
 
                 <div class="deck-content">
                   <h3> <%= link_to deck.title, decks_path(deck) %></h3>
-                  <%= button_to "Play", deck_rounds_path(deck), method: :post, class: "btn btn-success" %>
+                  <div class="d-flex justify-content-between">
+                    <%= button_to "Play", deck_rounds_path(deck), method: :post, class: "btn btn-success mx-auto" %>
+                    <% if deck.chat.present? %>
+                      <%= button_to "Edit", chat_path(deck.chat), method: :get, class: "btn btn-primary mx-auto" %>
+                    <% end %>
+                  </div>
                   <p><%= deck.questions.count %> questions</p>
                 </div>
 

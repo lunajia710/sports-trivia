@@ -31,10 +31,6 @@ class DecksController < ApplicationController
     else
       render :new, status: 422
     end
-    # in response to user givcing deck name
-    # create a chat with four questions and four answers per question, one correct, three incorrect
-    # @chat = RubyLLM.chat
-    # create a message with the prompt to create four questions and four answers per question, one
   end
 
   def show

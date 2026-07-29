@@ -8,7 +8,6 @@ class ChatsController < ApplicationController
   def confirm
     @chat = Chat.find(params[:id])
     @deck = @chat.deck
-    @chat.destroy
     redirect_to decks_path
   end
 end

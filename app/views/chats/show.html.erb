@@ -1,14 +1,14 @@
 <div class="chat-page">
 
   <!-- TOP: chat window -->
-  <section class="chat-window bg-white p-4 m-4 rounded-5">
+  <section class="chat-window bg-white p-4 m-4 rounded-5 overflow-auto" style="max-height: 60vh;">
     <h1><%= @deck.title %></h1>
 
     <div id="messages" class="messages m-4">
       <% @chat.messages.where(role: %w[user assistant]).each do |message| %>
         <div class="d-flex <%= message.role == "user" ? "justify-content-end" : "justify-content-start" %> mb-2">
           <div class="<%= message.role == "user" ? "bg-success text-white" : "bg-white text-primary" %> px-3 py-3 rounded-5">
-            <%= message.role == "assistant" ? "trivia master" : "#{current_user.username}" %>: <%= message.content %>
+            <%= message.role == "assistant" ? "trivia master" : current_user.username %>: <%= message.content %>
           </div>
         </div>
       <% end %>
@@ -16,14 +16,14 @@
 
     <div id="prompt" class="m-4">
       <%= simple_form_for [@chat, @message] do |f| %>
-        <%= f.input :content, label: false, placeholder: "Refine your deck — e.g. make them harder", required: true %>
+        <%= f.input :content, label: false, placeholder: "Refine your deck", required: true %>
         <%= f.button :submit, "Ask Trivia Master", class: "btn btn-primary w-100" %>
       <% end %>
     </div>
   </section>
 
   <!-- BOTTOM: horizontal scroll gallery -->
-  <section class="deck-gallery-section bg-success p-4 m-4 rounded-5" data-controller="carousel">
+  <section class="deck-gallery-section bg-info p-4 m-4 rounded-5" data-controller="carousel">
   <div class="d-flex justify-content-between align-items-center mb-2">
     <h2 class="mb-0">Preview</h2>
     <span data-carousel-target="counter" class="text-muted"></span>
@@ -49,8 +49,7 @@
     <button class="btn btn-outline-secondary" data-action="carousel#next">Next →</button>
   </div>
 
-  <%= button_to "Submit my deck", confirm_chat_path(@chat), method: :post,
-        class: "btn btn-light w-100 mt-3" %>
+  <%= button_to "Submit my deck", confirm_chat_path(@chat), method: :post, class: "btn btn-light w-100 mt-3" %>
 </section>
 
 </div>
