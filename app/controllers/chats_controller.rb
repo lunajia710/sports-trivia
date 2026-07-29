@@ -9,6 +9,6 @@ class ChatsController < ApplicationController
     @chat = Chat.find(params[:id])
     @deck = @chat.deck
     @chat.destroy
-    redirect_to deck_path(@deck), notice: "Deck saved!"
+    redirect_to decks_path
   end
 end

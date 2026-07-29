@@ -21,32 +21,12 @@ class DecksController < ApplicationController
     @deck = Deck.new
   end
 
-  def create # rubocop:disable Metrics/MethodLength
-    # user types name of deck and creates a new deck with that name
+  def create
     @deck = Deck.new(deck_params)
     @deck.user = current_user
-    data = RubyLLM.chat(model: "gpt-4o-mini")
-                  .with_schema(DeckSchema)
-                  .ask("Generate 10 questions about: #{@deck.title}. Each question must have 4 options with only 1 is_solution: ture") # rubocop:disable Layout/LineLength
-                  .content
-
     if @deck.save
-      data["questions"].each do |q|
-        question = Question.new(question: q["question"])
-        question.deck = @deck
-        question.save
-        q["options"].each do |o|
-          option = Option.new(response: o["response"], is_solution: o["is_solution"])
-          option.question = question
-          option.save
-        end
-      end
-      @chat = Chat.new
-      @chat.deck = @deck
-      @chat.save
-      @chat.messages.create!(role: "assistant", content: "Here's your #{@deck.title} deck.\n
-      I created 10 questions for now.\n
-      How do you want to refine it?")
+      create_deck_from_ai
+      create_chat_with_first_message
       redirect_to chat_path(@chat)
     else
       render :new, status: 422
@@ -66,6 +46,32 @@ class DecksController < ApplicationController
 
   def deck_params
     params.require(:deck).permit(:title)
+  end
+
+  def create_deck_from_ai # rubocop:disable Metrics/MethodLength
+    data = RubyLLM.chat(model: "gpt-4o-mini")
+                  .with_schema(DeckSchema)
+                  .ask("Generate 10 questions about: #{@deck.title}. Each question must have 4 options with only 1 is_solution: ture") # rubocop:disable Layout/LineLength
+                  .content
+    data["questions"].each do |q|
+      question = Question.new(question: q["question"])
+      question.deck = @deck
+      question.save
+      q["options"].each do |o|
+        option = Option.new(response: o["response"], is_solution: o["is_solution"])
+        option.question = question
+        option.save
+      end
+    end
+  end
+
+  def create_chat_with_first_message
+    @chat = Chat.new
+    @chat.deck = @deck
+    @chat.save
+    @chat.messages.create!(role: "assistant", content: "Here's your #{@deck.title} deck.\n
+      I created 10 questions for now.\n
+      How do you want to refine it?")
   end
 end
 
