@@ -32,7 +32,6 @@ class MessagesController < ApplicationController
                     .ask(@message.content)
                     .content
       Message.create(role: "assistant", content: data, chat: @chat)
-      render "chats/show"
     else
       render "chats/show", status: 422
     end

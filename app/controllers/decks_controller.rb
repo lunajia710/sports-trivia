@@ -12,6 +12,10 @@ class DecksController < ApplicationController
       end
     end
   end
+  SYSTEM_PROMPT = "You are a sports trivia master. \n
+                  I am a user who want your help make interesting trivia deck to play with friends. \n
+                  You should help me create a deck about: #{@deck.title} with 10 questions.\n
+                  Each question must have 4 options with only 1 is_solution: ture"
 
   def index
     @decks = Deck.all
@@ -49,10 +53,7 @@ class DecksController < ApplicationController
   end
 
   def create_deck_from_ai # rubocop:disable Metrics/MethodLength
-    data = RubyLLM.chat(model: "gpt-4o-mini")
-                  .with_schema(DeckSchema)
-                  .ask("Generate 10 questions about: #{@deck.title}. Each question must have 4 options with only 1 is_solution: ture") # rubocop:disable Layout/LineLength
-                  .content
+    data = RubyLLM.chat(model: "gpt-4o-mini").with_schema(DeckSchema).ask(SYSTEM_PROMPT).content
     data["questions"].each do |q|
       question = Question.new(question: q["question"])
       question.deck = @deck
