@@ -26,7 +26,7 @@
 
         <div class="answer-card">
           <div class="answer-card-body">
-            <p class="answer">
+            <div class="answer">
               <% @question.options.each do |option| %>
                 <% chosen = option.response == @answer.response %>
                 <div class="card m-3">
@@ -41,7 +41,7 @@
                   <% end %>
                 </div>
               <% end %>
-            </p>
+            </div>
           </div>
         </div>
       </div>
