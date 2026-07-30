@@ -10,7 +10,7 @@ class RoundsController < ApplicationController
     @remain = unanswered_questions.count
     @total = questions.count
     @completed = @total - @remain
-    @current = @total - @remain + 1
+    @current = @completed + 1
     @progress = (@completed.to_f / @total) * 100
     redirect_to deck_path(@deck) and return if @question.nil?
   end

@@ -4,6 +4,10 @@ class AnswersController < ApplicationController
     @answer = Answer.new(answer_params)
     @answer.round = @round
     @question = @answer.question
+    @total = @round.deck.questions.count
+    @completed = @round.answers.count
+    @current = @completed + 1
+    @progress = (@completed.to_f / @total) * 100
     if @answer.save
       @round.increment!(:score) if @answer.correct?
       respond_to do |format|
