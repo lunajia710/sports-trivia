@@ -32,6 +32,13 @@ class MessagesController < ApplicationController
     - Keep facts accurate. If a request is ambiguous, ask ONE short
       clarifying question before editing.
     - Only edit what the user asked for — don't rewrite the whole deck.
+    To update an existing question:
+    - use search_questions to find its ID
+    - use update_question to replace that question and the associated four options
+    - never use add_questions to modify an existing question
+    - never claim an update worked unless update_question reports success
+
+
 
     # Format
     Reply in short, friendly Markdown. After making a change, confirm
@@ -50,9 +57,10 @@ class MessagesController < ApplicationController
                     .with_instructions(SYSTEM_PROMPT)
                     .with_tools(
                       AddQuestionsTool.new(deck: @deck),
-                      SearchQuestionsTool.new(deck: @deck)
+                      SearchQuestionsTool.new(deck: @deck),
+                      UpdateQuestionTool.new(deck: @deck)
                     )
-                    .ask(@message.content)
+                    .ask(conversation_so_far)
                     .content
 
     @chat.messages.create!(role: "assistant", content: answer)
