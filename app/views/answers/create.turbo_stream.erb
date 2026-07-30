@@ -3,15 +3,8 @@
 
     <nav class="navbar bg-white border-bottom">
       <div class="container">
-
-        <a href="#" class="navbar-brand">
-          Trivia Decks
-        </a>
-
-        <a href="#" class="btn btn-success">
-          End Game
-        </a>
-
+        <%= link_to "Trivia Decks", root_path, class: "navbar-brand" %>
+        <%= link_to "End Game", decks_path, class: "btn btn-success" %>
       </div>
     </nav>
 
@@ -29,10 +22,17 @@
           <div class="answer-card-body">
             <p class="answer">
               <% @question.options.each do |option| %>
+                <% chosen = option.response == @answer.response %>
                 <div class="card m-3">
-                  <button class="btn w-100 <%= option.is_solution ? 'btn-success' : 'btn-danger'%> " disabled>
+                  <% if chosen %>
+                    <button class="btn w-100 <%= option.is_solution ? 'btn-success' : 'btn-danger'%> " disabled>
+                      <%= option.response %>
+                    </button>
+                  <% else %>
+                    <button class="btn w-100 <%= option.is_solution ? 'btn-success' : 'btn-light'%> " disabled>
                     <%= option.response %>
                   </button>
+                  <% end %>
                 </div>
               <% end %>
             </p>
@@ -40,7 +40,7 @@
         </div>
       </div>
       <div>
-        <%= link_to "Next", round_path(@round), class: "btn btn-primary m-3" %>
+        <%= link_to "Next", round_path(@round), data: { turbo: false }, class: "btn btn-primary m-3" %>
       </div>
     </main>
   </div>
