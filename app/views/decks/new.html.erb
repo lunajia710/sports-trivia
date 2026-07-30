@@ -1,0 +1,8 @@
+<div class="container m-4">
+  <h1>Generate a new deck</h1>
+  <%= simple_form_for @deck do |f| %>
+  <%= f.input :title, placeholder: "eg. The Greatest Football Legends"%>
+  <%= f.submit "AI Trivia Master", class: "btn btn-primary" %>
+
+<% end %>
+</div>

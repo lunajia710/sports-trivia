@@ -17,8 +17,9 @@ gem "turbo-rails"
 gem "stimulus-rails"
 # Build JSON APIs with ease [https://github.com/rails/jbuilder]
 gem "jbuilder"
-gem "ruby_llm", "~> 1.2.0"
-
+# Use Ruby LLM as one framework to interface with all main models
+gem "ruby_llm", "~> 1.8"
+gem "ruby_llm-schema"
 # Use Active Model has_secure_password [https://guides.rubyonrails.org/active_model_basics.html#securepassword]
 # gem "bcrypt", "~> 3.1.7"
 
