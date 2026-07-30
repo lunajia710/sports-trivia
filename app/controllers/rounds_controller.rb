@@ -7,7 +7,7 @@ class RoundsController < ApplicationController
     questions = @deck.questions
     unanswered_questions = questions.where.not(id: answered_question_ids)
     @question = unanswered_questions.first
-    redirect_to deck_path(@deck) and return if @question.nil?
+    redirect_to deck_path(@deck), flash: { confetti: true } and return if @question.nil?
   end
 
   def create

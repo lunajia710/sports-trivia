@@ -13,14 +13,11 @@
 
 
   <main class="container py-5">
-
     <div class="leaderboard-heading text-center mb-4">
       <h1><%= @deck.title %></h1>
-      <div class="leaderboard-card m-4 p-4">
-        Hi <%= @last_play.user.username %>, you have scored
-        <%= @last_play.score %> and ranked <%= @rank %> for this deck.
-      </div>
-
+      <% if flash[:confetti] %>
+        <div data-controller="confetti"></div>
+      <% end %>
       <div class="d-flex justify-content-center gap-2">
         <button class="btn btn-outline-success">
           Share
@@ -29,14 +26,16 @@
           👍 Like
         </button>
       </div>
-      <h2 class="text-muted m-4">
-        Leaderboard (Top 10 Plays)
-      </h2>
+      <div class="bg-success text-white m-4 p-4 rounded-5">
+        Hi <%= @last_play.user.username %>, your score is
+        <%= @last_play.score %> and your current rank is <%= @rank %>.
+      </div>
     </div>
+    <h2 class="text-muted mb-3 mx-auto">
+      Leaderboard (Top 10 Plays)
+    </h2>
     <div class="leaderboard-card">
-
       <table class="table table-hover mb-0">
-
         <thead>
           <tr>
             <th>Rank</th>
@@ -61,7 +60,6 @@
         <% end %>
 
       </table>
-
     </div>
 
   </main>
