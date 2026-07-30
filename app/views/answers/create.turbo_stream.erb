@@ -51,3 +51,7 @@
     </main>
   </div>
 <% end %>
+
+<%= turbo_stream.append "sounds" do %>
+  <audio autoplay src="<%= @answer.correct? ? '/sounds/correct.mp3' : '/sounds/wrong.mp3' %>"></audio>
+<% end %>
