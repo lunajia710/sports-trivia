@@ -16,7 +16,11 @@
     </nav>
 
     <main class="container py-5">
-
+      <div class="progress" role="progressbar" aria-label="Example with label" aria-valuenow="<%= @progress %>" aria-valuemin="0" aria-valuemax="100">
+        <div class="progress-bar" style="width: <%= @progress%>%;">
+          Questions: <%= @current %> / <%= @total %>
+        </div>
+      </div>
       <div class="question-heading">
         <h1>
           <%= @question.question %>
