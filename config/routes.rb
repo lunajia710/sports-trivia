@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   end
 
   resources :chats, only: [:show] do
+    member { post :confirm }
     resources :messages, only: [:create]
   end
 

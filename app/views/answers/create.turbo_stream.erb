@@ -1,5 +1,6 @@
 <%= turbo_stream.update "question_card" do %>
   <div class="play-trivia-page">
+
     <main class="container py-5">
 
       <div class="question-heading">
@@ -14,10 +15,17 @@
           <div class="answer-card-body">
             <p class="answer">
               <% @question.options.each do |option| %>
+                <% chosen = option.response == @answer.response %>
                 <div class="card m-3">
-                  <button class="btn w-100 <%= option.is_solution ? 'btn-success' : 'btn-danger'%> " disabled>
+                  <% if chosen %>
+                    <button class="btn w-100 <%= option.is_solution ? 'btn-success' : 'btn-danger'%> " disabled>
+                      <%= option.response %>
+                    </button>
+                  <% else %>
+                    <button class="btn w-100 <%= option.is_solution ? 'btn-success' : 'btn-light'%> " disabled>
                     <%= option.response %>
                   </button>
+                  <% end %>
                 </div>
               <% end %>
             </p>
