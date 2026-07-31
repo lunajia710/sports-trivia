@@ -46,7 +46,7 @@ class MessagesController < ApplicationController
     @message.chat = @chat
     @message.role = "user"
     @message.save
-    answer = RubyLLM.chat(model: "gpt-4o-mini")
+    answer = RubyLLM.chat
                     .with_instructions(SYSTEM_PROMPT)
                     .with_tools(
                       AddQuestionsTool.new(deck: @deck),
