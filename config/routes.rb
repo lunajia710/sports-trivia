@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   resources :decks, only: [:index, :new, :create, :show] do
     resources :rounds, only: [:create]
     resources :chats, only: [:create]
+    resources :questions, only: [:destroy]
   end
 
   resources :chats, only: [:show] do
