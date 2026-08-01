@@ -43,6 +43,12 @@ class DecksController < ApplicationController
     @rank = @deck.rounds.where("score > ?", @last_play.score).count + 1 if @last_play
   end
 
+  def destroy
+    @deck = Deck.find(params[:id])
+    @deck.destroy
+    redirect_to decks_path, notice: "Deck was successfull deleted"
+  end
+
   private
 
   def deck_params

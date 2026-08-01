@@ -36,8 +36,13 @@
                   <p class="mb-0"><%= deck.questions.count %> questions</p>
                 </div>
                 <div class="deck-actions d-flex justify-content-between">
-                  <%= button_to deck_rounds_path(deck), method: :post, class: "btn btn-success rounded-circle" do %>
+                  <%= button_to deck_rounds_path(deck), method: :post, class: "btn btn-success text-white rounded-circle" do %>
                     <i class="fa-solid fa-play"></i>
+                  <% end %>
+                  <%= button_to deck_path(deck), method: :delete,
+                  class: "btn btn-danger text-white rounded-circle",
+                  form: { data: { turbo_confirm: "Delete this deck? This can't be undone." } } do %>
+                    <i class="fa-solid fa-trash"></i>
                   <% end %>
                   <% if deck.chat.present? %>
                     <%= link_to chat_path(deck.chat), class: "btn btn-primary rounded-circle text-white" do %>
@@ -63,7 +68,7 @@
                   <p class="mb-0"><%= deck.questions.count %> questions</p>
                 </div>
                 <div class="deck-actions justify-content-between">
-                  <%= button_to deck_rounds_path(deck), method: :post, class: "btn btn-success rounded-circle" do %>
+                  <%= button_to deck_rounds_path(deck), method: :post, class: "btn btn-success text-white rounded-circle" do %>
                     <i class="fa-solid fa-play"></i>
                   <% end %>
                 </div>
