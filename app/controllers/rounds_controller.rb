@@ -12,7 +12,7 @@ class RoundsController < ApplicationController
     @completed = @total - @remain
     @current = @completed + 1
     @progress = (@completed.to_f / @total) * 100
-    redirect_to deck_path(@deck) and return if @question.nil?
+    redirect_to deck_path(@deck), flash: { confetti: true } and return if @question.nil?
   end
 
   def create
