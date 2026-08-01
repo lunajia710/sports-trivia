@@ -24,31 +24,31 @@
       </div>
     </div>
 
-    <% unless current_user.nil? %>
+    <% if user_signed_in? %>
       <div class="decks-section">
-            <div class="row">
-              <h2>My Decks</h2>
-              <% current_user.decks.each do |deck| %>
-                <div class="col-12 col-md-6 mb-3">
-                  <div class="deck-card h-100">
-                    <div class="deck-content">
-                      <h3 class="mb-0"> <%= link_to deck.title, deck_path(deck) %></h3>
-                      <p class="mb-0"><%= deck.questions.count %> questions</p>
-                    </div>
-                    <div class="deck-actions d-flex justify-content-between">
-                      <%= button_to deck_rounds_path(deck), method: :post, class: "btn btn-success rounded-circle" do %>
-                        <i class="fa-solid fa-play"></i>
-                      <% end %>
-                      <% if deck.chat.present? %>
-                        <%= link_to chat_path(deck.chat), class: "btn btn-primary rounded-circle text-white" do %>
-                          <i class="fa-solid fa-pen"></i>
-                        <% end %>
-                      <% end %>
-                    </div>
-                  </div>
+        <h2>My Decks</h2>
+        <div class="row">
+          <% current_user.decks.each do |deck| %>
+            <div class="col-12 col-md-6 mb-3">
+              <div class="deck-card h-100 d-flex flex-column">
+                <div class="deck-content flex-grow-1">
+                  <h3 class="mb-0"> <%= link_to deck.title, deck_path(deck) %></h3>
+                  <p class="mb-0"><%= deck.questions.count %> questions</p>
                 </div>
-              <% end %>
+                <div class="deck-actions d-flex justify-content-between">
+                  <%= button_to deck_rounds_path(deck), method: :post, class: "btn btn-success rounded-circle" do %>
+                    <i class="fa-solid fa-play"></i>
+                  <% end %>
+                  <% if deck.chat.present? %>
+                    <%= link_to chat_path(deck.chat), class: "btn btn-primary rounded-circle text-white" do %>
+                      <i class="fa-solid fa-pen"></i>
+                    <% end %>
+                  <% end %>
+                </div>
+              </div>
             </div>
+          <% end %>
+        </div>
       </div>
     <% end %>
 
@@ -57,8 +57,8 @@
         <div class="row">
           <% @top_decks.each do |deck| %>
             <div class="col-12 col-md-6 mb-3">
-              <div class="deck-card h-100">
-                <div class="deck-content">
+              <div class="deck-card h-100 d-flex flex-column">
+                <div class="deck-content flex-grow-1">
                   <h3 class="mb-0"> <%= link_to deck.title, deck_path(deck) %></h3>
                   <p class="mb-0"><%= deck.questions.count %> questions</p>
                 </div>
