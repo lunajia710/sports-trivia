@@ -40,6 +40,11 @@
             </li>
           <% end %>
         </ul>
+
+        <%= button_to "Delete Question",
+                      deck_question_path(@deck, question),
+                      method: :delete,
+                      class: "btn btn-outline-danger mt-3" %>
       </div>
     </div>
   <% end %>
