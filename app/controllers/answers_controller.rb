@@ -4,6 +4,10 @@ class AnswersController < ApplicationController
     @answer = Answer.new(answer_params)
     @answer.round = @round
     @question = @answer.question
+    @total = @round.deck.questions.count
+    @completed = @round.answers.count
+    @current = @completed + 1
+    @progress = (@completed.to_f / @total) * 100
     if @answer.save
       @round.increment!(:score) if @answer.correct?
       respond_to do |format|
@@ -14,12 +18,6 @@ class AnswersController < ApplicationController
       flash[:alert] = @answer.errors.full_messages.to_sentence
       redirect_to round_path(@round)
     end
-    # turbo stream right or wrong
-    # add a next button which link_to round_path(@round)
-    # create.turbo_stream.erb
-    # -> copy paste the 4 button layout
-    # -> logic for right / wrong styling
-    # -> add a link_to round_path
   end
 
   private
