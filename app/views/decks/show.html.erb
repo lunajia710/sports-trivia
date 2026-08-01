@@ -14,10 +14,12 @@
           👍 Like
         </button>
       </div>
-      <div class="bg-success text-white m-4 p-4 rounded-5">
-        Hi <%= @last_play.user.username %>, your recent score is
-        <%= @last_play.score %> and rank <%= @rank %> among all plays.
-      </div>
+      <% if @last_play %>
+        <div class="bg-success text-white m-4 p-4 rounded-5">
+          Hi <%= @last_play.user.username %>, your recent score is
+          <%= @last_play.score %> and rank <%= @rank %> among all plays.
+        </div>
+      <% end %>
     </div>
     <h2 class="text-muted mb-3 mx-auto">
       Leaderboard (Top 10 Plays)
