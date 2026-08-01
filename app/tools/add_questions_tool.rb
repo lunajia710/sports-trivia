@@ -8,7 +8,7 @@ class AddQuestionsTool < RubyLLM::Tool
   end
 
   def execute(topic:, count: 3) # rubocop:disable Metrics/MethodLength
-    data = RubyLLM.chat(model: "gpt-4o-mini")
+    data = RubyLLM.chat
                   .with_schema(DecksController::DeckSchema)
                   .ask("Generate #{count} trivia questions about: #{topic}.\n
                       Each with 4 options, exactly one is_solution: true.")
