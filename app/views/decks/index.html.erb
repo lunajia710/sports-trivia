@@ -1,10 +1,10 @@
 <div class="home-page">
   <main class="container py-5">
-    <div>
+    <%# <div>
+      <h3>Please signup or login to create your trivia with AI master</h3>
       <%= button_to "New Trivia AI Generator", new_deck_path, method: :get, class: "btn btn-success" %>
-    </div>
 
-    <div class="page-intro">
+    <%# <div class="page-intro">
       <h1>Search for Decks!</h1>
 
       <p>
@@ -22,7 +22,7 @@
           Search
         </button>
       </div>
-    </div>
+    </div> %>
 
     <% if user_signed_in? %>
       <div class="decks-section">
