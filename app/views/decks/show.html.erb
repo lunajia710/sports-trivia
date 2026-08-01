@@ -7,9 +7,11 @@
         <div data-controller="confetti"></div>
       <% end %>
       <div class="d-flex justify-content-center gap-2">
-        <button class="btn btn-outline-success">
-          Share
-        </button>
+        <div data-controller="clipboard" data-clipboard-text-value="<%= deck_url(@deck) %>">
+          <button class="btn btn-outline-success" data-clipboard-target="button" data-action="clipboard#copy">
+            <i class="fa-solid fa-share"></i> Share
+            </button>
+        </div>
           <button class="btn btn-success">
           👍 Like
         </button>
@@ -35,20 +37,18 @@
         </thead>
         <% prev_score = nil %>
         <% prev_rank = 0 %>
-        <% @leaderboard.each_with_index do |round, index| %>
-          <% rank = round.score == prev_score ? prev_rank : index + 1 %>
-          <% prev_score = round.score %>
-          <% prev_rank = rank %>
         <tbody>
-          <tr>
-            <td><%= rank %></td>
-            <td><%= round.user.username %></td>
-            <td><%= round.score %></td>
-          </tr>
-
+          <% @leaderboard.each_with_index do |round, index| %>
+            <% rank = round.score == prev_score ? prev_rank : index + 1 %>
+            <% prev_score = round.score %>
+            <% prev_rank = rank %>
+            <tr>
+              <td><%= rank %></td>
+              <td><%= round.user.username %></td>
+              <td><%= round.score %></td>
+            </tr>
+          <% end %>
         </tbody>
-        <% end %>
-
       </table>
     </div>
 
