@@ -45,7 +45,7 @@ class DecksController < ApplicationController
   end
 
   def create_deck_from_ai # rubocop:disable Metrics/MethodLength
-    data = RubyLLM.chat(model: "gpt-4o-mini").with_schema(DeckSchema).ask("create a deck about #{@deck.title}\n
+    data = RubyLLM.chat.with_schema(DeckSchema).ask("create a deck about #{@deck.title}\n
     with 10 questions. Each question with 4 options, only 1 is_solution: true. ").content
     data["questions"].each do |q|
       question = Question.new(question: q["question"])
