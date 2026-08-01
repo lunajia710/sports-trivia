@@ -54,8 +54,8 @@
 
     <div class="decks-section">
       <h2>Trending Decks (Top 5)</h2>
-      <% @top_decks.each do |deck| %>
         <div class="row">
+          <% @top_decks.each do |deck| %>
             <div class="col-12 col-md-6 mb-3">
               <div class="deck-card h-100">
                 <div class="deck-content">
@@ -69,8 +69,8 @@
                 </div>
               </div>
             </div>
+          <% end %>
         </div>
-      <% end %>
     </div>
 
   </main>
