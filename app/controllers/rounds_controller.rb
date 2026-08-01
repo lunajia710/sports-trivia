@@ -7,7 +7,12 @@ class RoundsController < ApplicationController
     questions = @deck.questions
     unanswered_questions = questions.where.not(id: answered_question_ids)
     @question = unanswered_questions.first
-    redirect_to deck_path(@deck) and return if @question.nil?
+    @remain = unanswered_questions.count
+    @total = questions.count
+    @completed = @total - @remain
+    @current = @completed + 1
+    @progress = (@completed.to_f / @total) * 100
+    redirect_to deck_path(@deck), flash: { confetti: true } and return if @question.nil?
   end
 
   def create

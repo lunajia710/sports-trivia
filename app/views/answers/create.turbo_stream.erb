@@ -2,7 +2,13 @@
   <div class="play-trivia-page">
 
     <main class="container py-5">
-
+      <div class="m-4">
+        <h3>Questions: <%= @current %> / <%= @total %></h3>
+        <div class="progress" role="progressbar" aria-label="Question progress" aria-valuenow="<%= @progress %>" aria-valuemin="0" aria-valuemax="100">
+          <div class="progress-bar" style="width: <%= @progress%>%;">
+          </div>
+        </div>
+      </div>
       <div class="question-heading">
         <h1>
           <%= @question.question %>
@@ -13,7 +19,7 @@
 
         <div class="answer-card">
           <div class="answer-card-body">
-            <p class="answer">
+            <div class="answer">
               <% @question.options.each do |option| %>
                 <% chosen = option.response == @answer.response %>
                 <div class="card m-3">
@@ -28,7 +34,7 @@
                   <% end %>
                 </div>
               <% end %>
-            </p>
+            </div>
           </div>
         </div>
       </div>
@@ -37,4 +43,8 @@
       </div>
     </main>
   </div>
+<% end %>
+
+<%= turbo_stream.append "sounds" do %>
+  <audio autoplay src="<%= @answer.correct? ? '/sounds/correct.mp3' : '/sounds/wrong.mp3' %>"></audio>
 <% end %>

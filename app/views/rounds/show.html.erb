@@ -2,6 +2,13 @@
   <div class="play-trivia-page">
 
     <main class="container py-5">
+      <div class="m-4">
+        <h3>Questions: <%= @current %> / <%= @total %></h3>
+        <div class="progress" role="progressbar" aria-label="Question progress" aria-valuenow="<%= @progress %>" aria-valuemin="0" aria-valuemax="100">
+          <div class="progress-bar" style="width: <%= @progress%>%;">
+          </div>
+        </div>
+      </div>
 
       <div class="question-heading">
         <h1>
@@ -29,3 +36,5 @@
   </div>
 
 </div>
+
+<div id="sounds"></div>

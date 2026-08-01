@@ -39,6 +39,8 @@ class DecksController < ApplicationController
   def show
     @deck = Deck.find(params[:id])
     @leaderboard = @deck.rounds.includes(:user).order(score: :desc).limit(10)
+    @last_play = @deck.rounds.where(user: current_user).order(created_at: :desc).first
+    @rank = @deck.rounds.where("score > ?", @last_play.score).count + 1
   end
 
   private
