@@ -1,27 +1,8 @@
 <div class="home-page">
-
-  <nav class="navbar bg-white border-bottom">
-    <div class="container">
-
-      <a href="#" class="navbar-brand">
-        Trivia Decks
-      </a>
-
-      <div>
-        <a href="#" class="btn btn-success">
-          Log in
-        </a>
-
-        <a href="#" class="btn btn-success">
-          Sign up
-        </a>
-      </div>
-
-    </div>
-  </nav>
-
-
   <main class="container py-5">
+    <div>
+      <%= button_to "New Trivia AI Generator", new_deck_path, method: :get, class: "btn btn-success" %>
+    </div>
 
     <div class="page-intro">
       <h1>Search for Decks!</h1>
@@ -43,31 +24,54 @@
       </div>
     </div>
 
+    <% unless current_user.nil? %>
+      <div class="decks-section">
+            <div class="row">
+              <h2>My Decks</h2>
+              <% current_user.decks.each do |deck| %>
+                <div class="col-12 col-md-6 mb-3">
+                  <div class="deck-card h-100">
+                    <div class="deck-content">
+                      <h3 class="mb-0"> <%= link_to deck.title, deck_path(deck) %></h3>
+                      <p class="mb-0"><%= deck.questions.count %> questions</p>
+                    </div>
+                    <div class="deck-actions d-flex justify-content-between">
+                      <%= button_to deck_rounds_path(deck), method: :post, class: "btn btn-success rounded-circle" do %>
+                        <i class="fa-solid fa-play"></i>
+                      <% end %>
+                      <% if deck.chat.present? %>
+                        <%= link_to chat_path(deck.chat), class: "btn btn-primary rounded-circle text-white" do %>
+                          <i class="fa-solid fa-pen"></i>
+                        <% end %>
+                      <% end %>
+                    </div>
+                  </div>
+                </div>
+              <% end %>
+            </div>
+      </div>
+    <% end %>
 
     <div class="decks-section">
-
-      <h2>Trending Decks</h2>
-        <% @decks.each do |deck| %>
-
-          <div class="row">
-
-            <div class="col-12 col-md-6">
-              <div class="deck-card">
-                <%# <div class="deck-image">
-                </div> %>
-
+      <h2>Trending Decks (Top 5)</h2>
+        <div class="row">
+          <% @top_decks.each do |deck| %>
+            <div class="col-12 col-md-6 mb-3">
+              <div class="deck-card h-100">
                 <div class="deck-content">
-                  <h3> <%= link_to deck.title, decks_path(deck) %></h3>
-                  <div class="d-flex justify-content-between">
-                    <%= button_to "Play", deck_rounds_path(deck), method: :post, class: "btn btn-success mx-auto" %>
-                    <% if deck.chat.present? %>
-                      <%= button_to "Edit", chat_path(deck.chat), method: :get, class: "btn btn-primary mx-auto" %>
-                    <% end %>
-                  </div>
-                  <p><%= deck.questions.count %> questions</p>
+                  <h3 class="mb-0"> <%= link_to deck.title, deck_path(deck) %></h3>
+                  <p class="mb-0"><%= deck.questions.count %> questions</p>
                 </div>
-
+                <div class="deck-actions justify-content-between">
+                  <%= button_to deck_rounds_path(deck), method: :post, class: "btn btn-success rounded-circle" do %>
+                    <i class="fa-solid fa-play"></i>
+                  <% end %>
+                </div>
               </div>
             </div>
-        <% end %>
+          <% end %>
         </div>
+    </div>
+
+  </main>
+</div>

@@ -1,4 +1,5 @@
 class DecksController < ApplicationController
+  skip_before_action :authenticate_user!, only: :index
   class DeckSchema < RubyLLM::Schema
     array :questions do
       object do
@@ -15,6 +16,8 @@ class DecksController < ApplicationController
 
   def index
     @decks = Deck.all
+    decks_by_rounds = Deck.left_joins(:rounds).group(:id).order("COUNT(rounds.id) DESC")
+    @top_decks = decks_by_rounds.limit(5)
   end
 
   def new
